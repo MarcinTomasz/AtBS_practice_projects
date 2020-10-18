@@ -1,5 +1,7 @@
 import re
 
+password = input('Enter your password: '  )
+
 pwRegex1 = re.compile(r'\w{8,}')
 pwRegex2 = re.compile(r'\d+')
 pwRegex3 = re.compile(r'[A-Z]+')
@@ -15,4 +17,3 @@ if mo1 == None or mo2 == None or mo3 == None or mo4 == None:
     print('You have a weak password.')
 else:
     print('That is a strong password.')
-
