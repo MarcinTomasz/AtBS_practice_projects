@@ -1,4 +1,4 @@
-#Program to 
+#Program to display and add items to a list.
 
 stuff = {'arrow': 12,
          'gold coin': 42,
