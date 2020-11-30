@@ -1,2 +1,3 @@
 # AtBS_practice_projects
-Practice projects from Automate the Boring Stuff
+
+Includes most exercises and practice projects from Automate the Boring Stuff by Al Sweigart.
