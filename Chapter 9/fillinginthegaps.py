@@ -1,39 +1,51 @@
 #Program that finds gaps in numbering of files and fills in those gaps.
 
-import os, shutil
+import os, shutil, re 
 
 file_path = input('What file path do you want to check for missing number?   \n')
 
 abs_file_path = os.path.abspath(file_path)
 
-#for spam in range(1, 11):
-#    new_file = open('C:\\Users\\novyp\\Desktop\\python_work\\AtBS\\AtBS_practice_projects\\fillinginthegaps\\spam%s.txt' % (spam), 'w')
+prefix = input('What prefix, including the numbering, would you like to check: ')
 
-base_name = os.path.basename(abs_file_path)
-dir_name = os.path.dirname(abs_file_path)
+#Regex to find the chosen sequentially named files.
+ordered_regex = re.compile(r'({0})(\d*)(.*)(\..*)'.format(prefix))
 
-print(abs_file_path)
-print(dir_name)
-print(base_name)
-print(abs_file_path)
+found = [] #Keeps track of numbering of files with chosen prefix.
 
-print('\nHere are the files in the directory:  \n' )
-
-files = os.listdir(file_path)
-for file in files:
-    print(file)
-
-number = 1
-new_file_name = 'spam' + str(number - 1) + '.txt'
-
-print(new_file_name)
-
-while True:
-    for file in abs_file_path:
-        check_file = os.path.basename(abs_file_path) + 'spam' + str(number) + '.txt'
+#Filewalk to find files with chosen prefix
+for folders, subfolders, filenames in os.walk(folder):
+    for filename in filenames:
         
-        if not os.path.exists(check_file):
-            break
+        if ordered_regex.search(filename) is not None:
+            #Determine length of numbering digits(to be used in new names)
+            num_length = int(len(ordered_regex.search(filename).group(2)))
+
+            #Find extension of files (for later naming)
+            extension = ordered_regex.search(filename).group(4)
+
+            #Number of files with chosen prefix
+            found.append(ordered_regex.search(filename).group(2))
+
+    ordered = sorted([int(x) for x in found])
+
+#Loop to check for correct numbering based on amount of files found
+for number in range(1, len(found) + 1):
+
+    #Calculate amount of 0's to prepend to reconstruct original format
+    zeroes = '0' * (nu,_length - len(str(number)))
+
+    #Recreate path of what should be then next file
+    current_file = '{}/{}{}{}'.format(folder, prefix, zeroes, number, extension)
+
+    #Check if the file exists
+    if os.path.exists(current_file) is False:
+        #Find numbering of actual next file and format path
+        next_num = ordered[number - 1]
+        next_zeroes = '0' * (num_length - len(str(next_num)))
+        next_file = (folder + '/' + prefix + str(next_zeroes) + str(next_num) + extension)
         
-        
-    
+        #Rename actual to desired with shutil move
+        shutil.move(next_file, current_file)
+
+print('File numbering has been fixed.')
