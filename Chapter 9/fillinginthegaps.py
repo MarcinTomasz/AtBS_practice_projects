@@ -9,9 +9,9 @@ abs_file_path = os.path.abspath(folder)
 filename_beginning = input('Type the beginning of the filenames you want to check: ')
 
 #Regex to find the chosen sequentially named files.
-ordered_regex = re.compile(r'({})(\d*)(.*)(\..*)'.format(filename_beginning))
+ordered_regex = re.compile(r'({})(\d*)(\..*)'.format(filename_beginning))
 
-found = [] #Keeps track of numbering of files with chosen prefix.
+found = [] #List variable to store files with chosen prefix.
 
 #Filewalk to find files with chosen prefix
 for folders, subfolders, filenames in os.walk(abs_file_path):
@@ -22,9 +22,9 @@ for folders, subfolders, filenames in os.walk(abs_file_path):
             num_length = int(len(ordered_regex.search(filename).group(2)))
             
             #Identify extension of files (for later naming)
-            extension = ordered_regex.search(filename).group(4)
+            extension = ordered_regex.search(filename).group(3)
             
-            #Add files with chosen filename to list
+            #Add files with chosen filename to list variable
             found.append(ordered_regex.search(filename).group(2))
 
     ordered = sorted([int(x) for x in found])
@@ -35,7 +35,7 @@ for number in range(1, len(found) + 1):
     #Calculate amount of 0's to prepend to reconstruct original format
     zeroes = '0' * (num_length - len(str(number)))
 
-    #Recreate path of what should be the next file
+    #Recreate path of the next file
     current_file = '{}/{}{}{}{}'.format(folder, filename_beginning, zeroes, number, extension)
 
     #Check if the file exists
