@@ -17,7 +17,7 @@ driver.get('http://inventwithpython.com/')
 try:
     elem = driver.find_elements(By.TAG_NAME, 'p')
     print('Found the element with that class name!')
-    for e in elem:
+    for e in elem[:2]: #Prints first two elements of list, index [0] and [1]
         print(e.text)
 except:
     print('Was not able to find an element with that name.')
