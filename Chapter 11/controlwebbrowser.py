@@ -16,18 +16,18 @@ driver = webdriver.Firefox(options=options)
 driver.get('http://inventwithpython.com')
 
 #Code to find CSS elements.
-''' try:
+try:
     elem = driver.find_elements(By.CLASS_NAME, 'col-sm-12')
     print('Found elements with that class name!')
     for e in elem[:2]: #prints first 2 items (index [0] and [1])
         print(e.text)
 except:
-    print('Was not able to find an element with that name.') '''
+    print('Was not able to find an element with that name.')
 
-''' #Code to find a link and click it. 
+#Code to find a link and click it. 
 linkElem = driver.find_element(by=By.LINK_TEXT, value='Subreddit')
 type(linkElem)
-linkElem.click() #follows the "Subreddit" link '''
+linkElem.click() #follows the "Subreddit" link
 
 #Code to enter text in webpage
 typeElem = driver.find_element(by=By.ID, value= 'mce-EMAIL')
