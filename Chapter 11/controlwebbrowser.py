@@ -4,10 +4,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.keys import Keys
 
-''' #Open Chrome
+#Open Chrome
 PATH = "C:\\Users\\novyp\\Desktop\\Python\\Webdrivers\\chromedriver.exe"
 browser = webdriver.Chrome(PATH)
-browser.get('http://inventwithpython.com') '''
+browser.get('http://inventwithpython.com')
 
 #Open Firefox
 options = Options()
