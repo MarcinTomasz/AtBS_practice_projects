@@ -29,11 +29,17 @@ time.sleep(5) #Need this method to make sure page loads before next command is i
 typeadress = browser.find_element(by= By.ID, value= 'username')
 typeadress.send_keys('mtmalek@protonmail.com')
 
-#Enter password
+#Enter password and sign in to client
 typepassword = browser.find_element(by= By.ID, value= 'password')
 typepassword.send_keys('&7K#Aib=,Q&7X-a')
 typepassword.send_keys(Keys.ENTER)
+time.sleep(10)
 
-#Sign in to email client
-#clicklogin = browser.find_element(by=By.CLASS_NAME, value= 'button button-large button-solid-norm w100 mt1-75') #Can't find correct value for Sign In button.
-#clicklogin.click()
+#Open and write new e-mail
+checking = browser.find_element(by= By.TAG_NAME, value= 'html')
+checking.send_keys('n')
+checkingemail = browser.find_element(by= By.LINK_TEXT, value='Email address')
+checkingemail.send_keys('mtm')
+#checking.send_keys(Keys.PAGE_DOWN)
+#checking.send_keys(Keys.PAGE_DOWN)
+#browser.quit()
