@@ -25,9 +25,9 @@ clicklogin = browser.find_element(by= By.LINK_TEXT, value= 'LOG IN')
 clicklogin.click()
 time.sleep(5) #Need this method to make sure page loads before next command is input.
 
-#Enter e-mail
+#Enter e-mail address
 typeadress = browser.find_element(by= By.ID, value= 'username')
-typeadress.send_keys('mtmalek@protonmail.com')
+typeadress.send_keys('recipient')
 
 #Enter password and sign in to client
 typepassword = browser.find_element(by= By.ID, value= 'password')
@@ -36,10 +36,27 @@ typepassword.send_keys(Keys.ENTER)
 time.sleep(10)
 
 #Open and write new e-mail
-checking = browser.find_element(by= By.TAG_NAME, value= 'html')
-checking.send_keys('n')
-checkingemail = browser.find_element(by= By.LINK_TEXT, value='Email address')
-checkingemail.send_keys('mtm')
-#checking.send_keys(Keys.PAGE_DOWN)
-#checking.send_keys(Keys.PAGE_DOWN)
-#browser.quit()
+newemail= browser.find_element(by= By.TAG_NAME, value= 'html')
+newemail.send_keys('n')
+time.sleep(1)
+
+#Recipient
+inputrecipient = browser.find_element(by= By.XPATH, value= "//input[@placeholder= 'Email address']")
+inputrecipient.send_keys('marcintm001@gmail.com')
+
+#Subject
+inputsubject = browser.find_element(by= By.XPATH, value= "//input[@placeholder= 'Subject']")
+inputsubject.send_keys('subject')
+
+#Text
+inputsubject = browser.find_element(by= By.XPATH, value= "//input[@placeholder= 'Subject']")
+inputsubject.send_keys(Keys.TAB + 'message1')
+
+#Send email
+sendemail = browser.find_element(by= By.XPATH, value= "//span[@class= 'pl1 pr1 no-mobile']")
+#sendemail = browser.find_element(by= By.LINK_TEXT, value= "Send")
+#sendemail.send_keys(Keys.CONTROL + Keys.ENTER)
+sendemail.click()
+
+#Close 
+browser.quit()
