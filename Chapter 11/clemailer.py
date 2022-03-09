@@ -25,9 +25,9 @@ time.sleep(5) #Need this method to make sure page loads before next command is i
 
 #Enter e-mail address
 typeadress = browser.find_element(by= By.ID, value= 'username')
-typeadress.send_keys('mtmalek@protonmail.com')
+typeadress.send_keys('...@protonmail.com')
 
-#Enter password and sign in to client
+#Enter password and sign in to service
 typepassword = browser.find_element(by= By.ID, value= 'password')
 typepassword.send_keys('...')
 typepassword.send_keys(Keys.ENTER)
