@@ -7,7 +7,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-#Remove docstrings to open script from command line.
+#Remove docstrings when opening script from command line.
 ''' recipient = sys.argv[1]
 subject = sys.argv[2]
 message = sys.argv[3] '''
