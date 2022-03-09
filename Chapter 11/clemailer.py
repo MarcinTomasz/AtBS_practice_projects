@@ -27,11 +27,11 @@ time.sleep(5) #Need this method to make sure page loads before next command is i
 
 #Enter e-mail address
 typeadress = browser.find_element(by= By.ID, value= 'username')
-typeadress.send_keys('recipient')
+typeadress.send_keys('mtmalek@protonmail.com')
 
 #Enter password and sign in to client
 typepassword = browser.find_element(by= By.ID, value= 'password')
-typepassword.send_keys('&7K#Aib=,Q&7X-a')
+typepassword.send_keys('...')
 typepassword.send_keys(Keys.ENTER)
 time.sleep(10)
 
@@ -40,23 +40,18 @@ newemail= browser.find_element(by= By.TAG_NAME, value= 'html')
 newemail.send_keys('n')
 time.sleep(1)
 
-#Recipient
+#Add Recipient
 inputrecipient = browser.find_element(by= By.XPATH, value= "//input[@placeholder= 'Email address']")
 inputrecipient.send_keys('marcintm001@gmail.com')
 
-#Subject
+#Add Subject
 inputsubject = browser.find_element(by= By.XPATH, value= "//input[@placeholder= 'Subject']")
 inputsubject.send_keys('subject')
 
-#Text
+#Enter Text and send email
 inputsubject = browser.find_element(by= By.XPATH, value= "//input[@placeholder= 'Subject']")
-inputsubject.send_keys(Keys.TAB + 'message1')
+inputsubject.send_keys(Keys.TAB + 'message' + Keys.CONTROL, Keys.ENTER) #Program works from IDE but not from the command line, not sure why...
+time.sleep(1)
 
-#Send email
-sendemail = browser.find_element(by= By.XPATH, value= "//span[@class= 'pl1 pr1 no-mobile']")
-#sendemail = browser.find_element(by= By.LINK_TEXT, value= "Send")
-#sendemail.send_keys(Keys.CONTROL + Keys.ENTER)
-sendemail.click()
-
-#Close 
-browser.quit()
+#Close browser
+browser.close()
