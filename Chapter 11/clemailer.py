@@ -46,10 +46,13 @@ inputrecipient.send_keys('marcintm001@gmail.com')
 inputsubject = browser.find_element(by= By.XPATH, value= "//input[@placeholder= 'Subject']")
 inputsubject.send_keys('subject')
 
-#Enter Text and send email
+#Enter email message
 inputsubject = browser.find_element(by= By.XPATH, value= "//input[@placeholder= 'Subject']")
-inputsubject.send_keys(Keys.TAB + 'message' + Keys.CONTROL, Keys.ENTER) #Program works from IDE but not from the command line, not sure why...
-time.sleep(1)
+inputsubject.send_keys(Keys.TAB + message)
+
+#Send email
+sendemail = browser.find_element(by= By.XPATH, value= "//button[@class= 'button button-group-item button-ghost-weak composer-send-button']")
+sendemail.click() #This section runs from IDE but not from the command line, can't figure out why...
 
 #Close browser
 browser.close()
