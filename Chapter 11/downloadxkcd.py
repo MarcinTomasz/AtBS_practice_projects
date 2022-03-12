@@ -3,16 +3,17 @@
 
 import requests, os, bs4
 
-url = 'http://xkcd.com'     #starting url
-os.makedirs('xkcd', exist_ok=True)      #store comics in ./xkcd
+url = 'http://xkcd.com'                 #starting url
+os.makedirs('xkcd', exist_ok=True)      #store comics in ./xkcd, folder exist_ok=True prevents exception if folder already exists
 
 while not url.endswith('#'):
   #Download the page.
   print('Downloading page %s...' % url)
   res = requests.get(url)
-  res.raise_for_status()
+  res.raise_for_status()                #Throws an exception and ends the program if something goes wrong with the download.
   
-  soup = bs4.BeautifulSoup(res.text)
+  #Creates BeautifulSoup text object from the res variable.
+  soup = bs4.BeautifulSoup(res.text)    
   
   #Find the URL of the comic image.
   comicElem = soup.select('#comic img')
