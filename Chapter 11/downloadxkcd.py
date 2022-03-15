@@ -1,52 +1,42 @@
 #! python3
-#download Xkcd.py - downloads every single xkcd comic on website
 
-import requests, os, bs4
+#Program to download images from photo hosting website with certain tag
 
-url = 'https://xkcd.com/25'             #starting url
-os.makedirs('xkcd', exist_ok=True)      #store comics in ./xkcd, folder exist_ok=True prevents exception if folder already exists
+import os, requests, bs4
 
-while not url.endswith('#'):
-  #Download the page.
-  print('Downloading page %s...' % url)
-  res = requests.get(url)
-  res.raise_for_status()                #Throws an exception and ends the program if something goes wrong with the download.
-  
-  #Creates BeautifulSoup text object from the res variable.
-  soup = bs4.BeautifulSoup(res.text, features= "html.parser")   
-  
-  #Find the URL of the comic image.
-  comicElem = soup.select('#comic img')
-  if comicElem == []:
-    print('Could not find comic image.')
+searchterm = input('Enter search term(s): ')
+
+def image_downloader(extension):
+    """Search and download all images from Imgur."""
+    url = 'https://imgur.com/search?q=' + searchterm
+    os.makedirs('/Users/novyp/Desktop/pics', exist_ok=True)
     
-  else:
-    try:
-        comicUrl = 'https:' + comicElem[0].get('src')
-            
-        #Download the image.
-        print('Downloading image %s...' % (comicUrl))
-        res = requests.get(comicUrl)
-        res.raise_for_status()
-     
-    except:
-        comicUrl = 'https://xkcd.com' + comicElem[0].get('src')
-            
-        #Download the image.
-        print('Downloading image %s...' % (comicUrl))
-        res = requests.get(comicUrl)
-        res.raise_for_status()
+    res = requests.get(url)
+    res.raise_for_status()
     
-    finally:
-        #Save the image to ./xkcd.
-        imageFile = open(os.path.join('xkcd', os.path.basename(comicUrl)), 'wb')
-        for chunk in res.iter_content(100000):
-          imageFile.write(chunk)
-        imageFile.close()
+    soup = bs4.BeautifulSoup(res.text, features= 'html.parser')   
+    image_elem = soup.select('.post > .image-list-link img') #select method is used to find matching elements using 
+                                                             #CSS selector - all image-list-link imgs one level in all post classes
+    
+    for i, image in enumerate(image_elem):
+        #Convert image URL from thumbnail size to fullsize version.
+        image_url_s = 'https:' + image_elem[i].get('src')
+        image_url = image_url_s[:-5] + '.jpeg'
         
-  
-  #Get the Prev button's url.
-  prevLink = soup.select('a[rel="prev"]')[0]
-  url = 'https://xkcd.com' + prevLink.get('href')
+        print('Downloading image {}'.format(image_url))
+        res = requests.get(image_url)
+        res.raise_for_status()
+        image_file = open(os.path.join(r'/Users/novyp/Desktop/pics', os.path.basename(image_url)), 'wb')
+        
+        for chunk in res.iter_content(1000000):
+            image_file.write(chunk)
+        image_file.close()
     
-print('Done')
+    return len(image_elem)
+
+downloaded = image_downloader('jpg')
+
+if downloaded == 0:
+    print('No images found.')
+else:
+    print('All ' + str(downloaded) + ' files successfully downloaded.')
