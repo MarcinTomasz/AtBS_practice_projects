@@ -4,7 +4,7 @@
 import os, requests, bs4
 
 url = 'https://xkcd.com/'
-os.makedirs('xkcd', exist_ok = True)
+new_file = os.makedirs('xkcd', exist_ok = True)
 
 while not url.endswith('#'):
     #Download the comic.
@@ -31,8 +31,8 @@ while not url.endswith('#'):
         imageFile.write(chunk)
     imageFile.close()
 
-#Get the Previous button's url.
-prevLink = soup.select('a[rel = "prev"')[0]
-url = 'http://xkcd.com' + prevLink.get('href')
+    #Get the Previous button's url.
+    prevLink = soup.select('a[rel = "prev"')[0]
+    url = 'http://xkcd.com' + prevLink.get('href')
                                     
-print('Done.')             
+print('All files downloaded.')             
