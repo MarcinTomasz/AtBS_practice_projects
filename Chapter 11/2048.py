@@ -6,6 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import bs4, requests
 
 #Open 2048 Github page.
 PATH = "C:\\Users\\novyp\\Desktop\\Python\\Webdrivers\\chromedriver.exe"
@@ -25,7 +26,20 @@ time.sleep(1)
 #Play game with arrows.
 playgame = browser.find_element(by= By.TAG_NAME, value= 'html')
 
-playgame.send_keys(Keys.ARROW_UP)
-playgame.send_keys(Keys.ARROW_DOWN)
-playgame.send_keys(Keys.ARROW_UP)
-time.sleep(5)
+
+#Not sure if below code is ultimately useful.
+url = 'https://play2048.co/'
+res = requests.get(url)
+
+soup = bs4.BeautifulSoup(res.text, features= 'html.parser')
+endofgame = soup.select('#game-message game-over > #retry-button')
+
+print(endofgame)
+print('Here is the message:' + endofgame)
+''' while not endofgame:
+    playgame.send_keys(Keys.ARROW_UP)
+    playgame.send_keys(Keys.ARROW_DOWN)
+    playgame.send_keys(Keys.ARROW_UP) '''
+
+time.sleep(1)
+
