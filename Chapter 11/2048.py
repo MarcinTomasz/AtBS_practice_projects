@@ -29,7 +29,7 @@ clickcookies = WebDriverWait(browser, 1).until(EC.element_to_be_clickable((By.XP
 #Play game with arrows.
 playgame = browser.find_element(by= By.TAG_NAME, value= 'html')
 while True:
-    # try:
+    # try: This line not needed.
         playgame.send_keys(Keys.ARROW_UP)
         playgame.send_keys(Keys.ARROW_DOWN)
         playgame.send_keys(Keys.ARROW_LEFT)
