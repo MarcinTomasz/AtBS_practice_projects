@@ -44,6 +44,7 @@ while True:
         playgame.send_keys(Keys.ARROW_DOWN)
         playgame.send_keys(Keys.ARROW_LEFT)
         playgame.send_keys(Keys.ARROW_RIGHT)
+    #Still need to fix this part so window closes when game is over.
     except:
         soup = bs4.BeautifulSoup(res.text, features= 'html.parser')
         endofgame = soup.select('#game-message game-over > #retry-button')
