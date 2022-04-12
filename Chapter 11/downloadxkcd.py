@@ -3,7 +3,7 @@
 #Script to download all XKCD comics
 import os, requests, bs4
 
-number = input('How many comics do you want to download: ' )
+number = input('How many comics you want to download: ' )
 
 url = 'https://xkcd.com/' + number
 os.makedirs('xkcd', exist_ok = True)
@@ -26,7 +26,7 @@ while not url.endswith('#'):
         comicUrl = 'https:' + comicElem[0].get('src')
             
     #Download image.
-    print('Downloading image %s...' % (comicUrl))
+    #print('Downloading image %s...' % (comicUrl))
     res =requests.get(comicUrl)
     res.raise_for_status()
     
