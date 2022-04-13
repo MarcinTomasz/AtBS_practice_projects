@@ -4,7 +4,7 @@
 
 import requests, sys, webbrowser, bs4
 
-print('Googling...') # display text while loading the google page
+print('Ducking...') # display text while loading the google page
 res = requests.get('https://duckduckgo.com/?q=' + ''.join(sys.argv[1:]))
 res.raise_for_status()
 
@@ -16,4 +16,3 @@ linkElems = soup.select('.r a')
 numOpen = min(5, len(linkElems))
 for i in range(numOpen):
     webbrowser.open('http://google.com' + linkElems[i].get('href'))
-    
