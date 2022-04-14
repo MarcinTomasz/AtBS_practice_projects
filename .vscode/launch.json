@@ -13,6 +13,7 @@
             "console": "integratedTerminal",
             "justMyCode": true,
             "args": [
+                "mtmalek@protonmail.com",
                 "fromVSCode",
                 "hellofromtheIDE"
             ]
