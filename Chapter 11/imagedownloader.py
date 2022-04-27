@@ -9,7 +9,7 @@ searchterm = input('Enter search term(s): ')
 def image_downloader(extension):
     """Search and download all images from Imgur."""
     url = 'https://imgur.com/search?q=' + searchterm
-    os.makedirs('/Users/novyp/Desktop/pics', exist_ok=True)
+    os.makedirs('/Users/TC/Desktop/pics', exist_ok=True)
     
     res = requests.get(url)
     res.raise_for_status()
@@ -21,12 +21,12 @@ def image_downloader(extension):
     for i, image in enumerate(image_elem):
         #Convert image URL from thumbnail size to fullsize version.
         image_url_s = 'https:' + image_elem[i].get('src')
-        image_url = image_url_s[:-5] + '.jpeg'
+        image_url = image_url_s[:-5] + '.jpg'
         
         print('Downloading image {}'.format(image_url))
         res = requests.get(image_url)
         res.raise_for_status()
-        image_file = open(os.path.join(r'/Users/novyp/Desktop/pics', os.path.basename(image_url)), 'wb')
+        image_file = open(os.path.join(r'/Users/TC/Desktop/pics/', os.path.basename(image_url)), 'wb')
         
         for chunk in res.iter_content(1000000):
             image_file.write(chunk)
